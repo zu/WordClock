@@ -17,8 +17,18 @@ if (IS_DEVELOPMENT) {
 }
 
 const { getLedsForTime } = require('./time-to-leds');
+const { nowInTimezone } = require('./now');
+const { loadConfig } = require('./config');
+
+function scale(value, factor) {
+    return Math.round(value * factor);
+}
 
 let startupCounter = 0;
+let config = loadConfig();
+setInterval(() => {
+    config = loadConfig();
+}, 1000);
 
 function run() {
     setInterval(() => {
@@ -30,15 +40,16 @@ function run() {
             return;
         }
 
-        const { on, dim } = getLedsForTime(new Date());
+        const { on, dim } = getLedsForTime(nowInTimezone(config.timezone));
+        const { r, g, b } = config.color;
 
         clock.all(0, 0, 0);
         for (const led of on) {
-            clock.set(led, 255, 255, 255);
+            clock.set(led, scale(r, config.brightness), scale(g, config.brightness), scale(b, config.brightness));
         }
 
         for (const led of dim) {
-            clock.set(led, 51, 51, 51);
+            clock.set(led, scale(r, config.dotBrightness), scale(g, config.dotBrightness), scale(b, config.dotBrightness));
         }
 
         clock.sync();
