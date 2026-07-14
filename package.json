@@ -5,14 +5,14 @@
     "start": "cross-env NODE_ENV=production node src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js"
   },
-  "dependencies": {
-    "dotstar": "^1.0.0",
-    "pi-spi": "^1.2.1"
-  },
   "devDependencies": {
     "blessed": "^0.1.81",
     "cross-env": "^7.0.2",
-    "nodemon": "^2.0.4"
+    "nodemon": "^3.1.14"
+  },
+  "optionalDependencies": {
+    "dotstar": "^1.0.0",
+    "pi-spi": "^1.2.1"
   },
   "engines": {
     "node": ">=10.x"
