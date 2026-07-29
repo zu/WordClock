@@ -7,7 +7,9 @@ const DEFAULTS = {
     color: { r: 255, g: 255, b: 255 },
     brightness: 1,       // 0-1, applied to the word LEDs
     dotBrightness: 0.2,  // 0-1, applied to the minute-dot LEDs
-    timezone: null        // IANA zone e.g. "Europe/Zurich"; null = system local time
+    timezone: null,       // IANA zone e.g. "Europe/Zurich"; null = system local time
+    events: [],           // special-day events, see src/events.js
+    effectCadence: { mode: 'interval', minutes: 30 } // or { mode: 'random', averageMinutes }
 };
 
 function readConfigFile() {

@@ -1,0 +1,122 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WordClock Settings</title>
+<link rel="stylesheet" href="style.css">
+
+<header>
+    <h1>WordClock</h1>
+</header>
+
+<main>
+    <section>
+        <h2>Base settings</h2>
+        <form id="config-form">
+            <label>
+                Color
+                <input type="color" id="config-color" value="#ffffff">
+            </label>
+
+            <label>
+                Brightness
+                <input type="range" id="config-brightness" min="0" max="1" step="0.05">
+                <output id="config-brightness-value"></output>
+            </label>
+
+            <label>
+                Minute-dot brightness
+                <input type="range" id="config-dot-brightness" min="0" max="1" step="0.05">
+                <output id="config-dot-brightness-value"></output>
+            </label>
+
+            <label>
+                Timezone
+                <input type="text" id="config-timezone" placeholder="e.g. Europe/Zurich (leave empty for system time)">
+            </label>
+
+            <fieldset>
+                <legend>Special-day effect cadence</legend>
+                <label>
+                    <input type="radio" name="cadence-mode" value="interval">
+                    Every
+                    <input type="number" id="cadence-interval-minutes" min="1" step="1" style="width: 5em">
+                    minutes
+                </label>
+                <label>
+                    <input type="radio" name="cadence-mode" value="random">
+                    Randomly, about every
+                    <input type="number" id="cadence-random-minutes" min="1" step="1" style="width: 5em">
+                    minutes on average
+                </label>
+            </fieldset>
+
+            <button type="submit">Save settings</button>
+            <span class="save-status" id="config-save-status"></span>
+        </form>
+    </section>
+
+    <section>
+        <h2>Special-day events</h2>
+        <table id="events-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Color</th>
+                    <th>Effect</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="events-body"></tbody>
+        </table>
+
+        <form id="event-form">
+            <input type="hidden" id="event-id">
+            <h3 id="event-form-title">Add event</h3>
+
+            <label>
+                Name
+                <input type="text" id="event-name" required>
+            </label>
+
+            <label>
+                <input type="checkbox" id="event-recurring" checked>
+                Repeats every year
+            </label>
+
+            <label>
+                Month
+                <input type="number" id="event-month" min="1" max="12" required>
+            </label>
+
+            <label>
+                Day
+                <input type="number" id="event-day" min="1" max="31" required>
+            </label>
+
+            <label id="event-year-label">
+                Year
+                <input type="number" id="event-year">
+            </label>
+
+            <label>
+                Color
+                <input type="color" id="event-color" value="#ff00ff">
+            </label>
+
+            <label>
+                Effect
+                <select id="event-effect">
+                    <option value="none">Color only</option>
+                    <option value="ripple">Ripple</option>
+                    <option value="firework">Firework</option>
+                    <option value="heart">Heart</option>
+                </select>
+            </label>
+
+            <button type="submit" id="event-submit">Add event</button>
+            <button type="button" id="event-cancel-edit" hidden>Cancel</button>
+        </form>
+    </section>
+</main>
+
+<script src="app.js"></script>
